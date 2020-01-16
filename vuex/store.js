@@ -1,6 +1,7 @@
 import Vue from 'vue'
 // import Vuex from 'vuex'
-import Vuex from './vuex'
+import Vuex from '../libs/vuex'
+// import Vuex from '../libs/vuexx'
 
 Vue.use(Vuex) // 1.使用这个插件的install方法
 
@@ -8,6 +9,14 @@ const persits = (store) => {
   store.subscribe((mutation, state) => {
     localStorage.setItem('vuex-state', JSON.stringify(state))
   })
+}
+
+const moduleE = {
+  namespaced: true,
+  state: {
+    name: 'xiaoming',
+    age: 1
+  }
 }
 
 export default new Vuex.Store({ // 导出一个store实例
@@ -23,7 +32,7 @@ export default new Vuex.Store({ // 导出一个store实例
     }
   },
   mutations: {
-    sayncAdd (state, payload) {
+    syncAdd (state, payload) {
       state.age += payload
     },
     syncMinus (state, payload) {
@@ -31,18 +40,21 @@ export default new Vuex.Store({ // 导出一个store实例
     }
   },
   actions: {
+    asyncAdd ({ commit }, payload) {
+      setTimeout(() => {
+        commit('syncAdd', payload)
+      }, 1000)
+    },
     asyncMinus ({ commit }, payload) {
       setTimeout(() => {
         commit('syncMinus', payload)
       }, 1000)
-    },
-    asyncAdd ({ commit }, payload) {
-      setTimeout(() => {
-        commit('sayncAdd', payload)
-      }, 1000)
     }
   },
   modules: {
+    // 将模块挂载到根store
+    moduleE, // 等同于moduleE : 等同于moduleE, 上面模块的命名空间是moduleE
+    // eee: moduleE, // 下面模块的命名空间是 eee
     a: {
       state: { a: 1 },
       modules: {
@@ -54,9 +66,21 @@ export default new Vuex.Store({ // 导出一个store实例
           },
           state: { c: 1 },
           mutations: { // 多个模块之间有同名的方法，会依次执行
-            // this.mutations[sayncAdd] = [fn, fn]
-            sayncAdd (state, payload) {
+            // this.mutations[syncAdd] = [fn, fn]
+            syncAdd (state, payload) {
               state.c += payload
+            }
+          },
+          actions: {
+            asyncAdd ({ commit }, payload) {
+              setTimeout(() => {
+                commit('syncAdd', payload)
+              }, 1000)
+            }
+          },
+          modules: {
+            d: {
+              state: { d: 2 }
             }
           }
         }
