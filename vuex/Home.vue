@@ -11,8 +11,7 @@
 
 <script>
 // import { mapState } from 'vuex'
-import Vuex from '../libs/vuex'
-// import Vuex from '../libs/vuexx'
+import Vuex from './vuex'
 
 export default {
   name: 'home',

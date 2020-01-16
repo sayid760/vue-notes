@@ -1,7 +1,6 @@
 import Vue from 'vue'
 // import Vuex from 'vuex'
-import Vuex from '../libs/vuex'
-// import Vuex from '../libs/vuexx'
+import Vuex from './vuex'
 
 Vue.use(Vuex) // 1.使用这个插件的install方法
 
