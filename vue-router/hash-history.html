@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>router原理</title>
+</head>
+<body>
+  <!-- hash -->
+  <!-- <a href="#/home">首页</a>
+  <a href="#/about">关于</a> -->
+
+  <!-- history -->
+  <a onclick="go('/home')">首页</a>
+  <a onclick="go('/about')">关于</a>
+  <div id="html"></div>
+  <script>
+  //   // hash原理
+  //  window.addEventListener('load',()=>{
+  //     html.innerHTML = location.hash.slice(1) // 在页面进来时初始化html
+  //   })
+
+  //   window.addEventListener('hashchange',()=>{ // 判断网页状态是否改变
+  //     html.innerHTML = location.hash.slice(1) // 根据hash变化，替换html内容
+  //   })
+  //  
+
+    // history 浏览器提供的
+    // 可以做到改变网址却不需要刷新页面
+    function go(pathname){
+      history.pushState({},null,pathname)
+      html.innerHTML = pathname
+    }
+    window.addEventListener('popstate',()=>{ // 有前进或后退就监听go()
+      go(location.pathname)
+    })
+
+  </script>
+</body>
+</html>
