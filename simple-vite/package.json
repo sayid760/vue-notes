@@ -1,0 +1,21 @@
+{
+	"name": "my-vite",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"bin": {
+		"s-vite": "./bin/www.js"
+	},
+	"scripts": {
+		"dev": "s-vite"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"es-module-lexer": "^0.3.24",
+		"koa": "^2.13.0",
+		"koa-static": "^5.0.0",
+		"magic-string": "^0.25.7"
+	}
+}
