@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h1>{{name}}</h1>
+        <!-- 插值绑定 -->
+        <p>{{name}}</p>
+        <!-- 指令解析 -->
+        <p k-text="name"></p>
+        <p>{{age}}</p>
+        <p>
+            {{doubleAge}}
+        </p>
+        <!-- 双向绑定 -->
+        <input type="text" k-model="name" />
+        <!-- 事件处理 -->
+        <button @click="changeName">呵呵</button>
+        <!-- html内容解析 -->
+        <div k-html="html"></div>
+        <button id="btn">点击</button>
+    </div>
+    <script src="./compile.js"></script>
+    <script src="./MyVue.js"></script>
+    <script>
+        const app = new MyVue({
+        el: "#app",
+        data: {
+          name: "I am test.",
+          age: 12,
+          html: "<button>这是一个按钮</button>"
+        },
+        created() {
+          console.log("开始啦");
+          // setTimeout(() => {
+          //   this.name = "我是测试";
+          // }, 1500);
+        },
+        methods: {
+          changeName() {
+            this.name = "哈喽，开课吧";
+            this.age = 1;
+          }
+        }
+      });
+
+      console.dir(app)
+      const Btn=document.getElementById('btn')
+      Btn.onclick=function(){
+        console.log('test')
+        app.$data.name = 'hello,xxxx'
+      }
+        /*
+            1、找插值 {{age}}--->找出对应的元素和文本
+            2、替换插值 {{age}} --->20
+        */
+    </script>
+</body>
+</html>
